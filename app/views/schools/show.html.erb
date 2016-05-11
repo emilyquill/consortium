@@ -1,0 +1,64 @@
+<h1>
+  <%= @school.school_name %>
+</h1>
+<h3><%= @narrative %></h3>
+<ul>
+  <li>LA: <%= @school.local_authority.name %></li>
+
+
+
+  <li>Tel: <%= @school.telephone_number %></li>
+  <li><%= @school.pending_closure %></li>
+  <li><%= @school.school_type %></li>
+  <li><%= @school.school_sub_type %></li>
+  <li><%= @school.is_primary %></li>
+  <li><%= @school.is_secondary %></li>
+  <li><%= @school.is_post_16 %></li>
+  <li><%= @school.age_lowest %></li>
+  <li><%= @school.age_highest %></li>
+  <li><%= @school.gender %></li>
+  <li><%= @school.sixth_form_gender %></li>
+  <li><%= @school.religious_denomination %></li>
+  <li><%= @school.admission_policy %></li>
+
+</ul>
+
+
+<div class="profile container">
+  <div id="map-small"></div>
+  <li>Address:</li>
+    <ul>
+      <li><%= @school.address_street %></li>
+      <% if @school.address_line_two %>
+        <li><%= @school.address_line_two %></li>
+      <% end %>
+    <% if @school.address_line_three %>
+      <li><%= @school.address_line_three %></li>
+    <% end %>
+  <li><%= @school.address_town %></li>
+  <li><%= @school.address_postcode %></li>
+    </ul>
+</div>
+<script>
+var map;
+  function initMap() {
+
+    var schLatLng = {lat: <%= @school.lat %>, lng: <%= @school.lon %>};
+
+    map = new google.maps.Map(document.getElementById('map-small'), {
+      center: schLatLng,
+      zoom: 16
+    });
+
+    var image = '/assets/school.png'
+    var marker = new google.maps.Marker({
+      position: schLatLng,
+      animation: google.maps.Animation.DROP,
+      icon: image,
+      title: '<%= @school.school_name %>'
+    });
+marker.setMap(map);
+  }
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=<%= ENV['GEOCODER_API_KEY'] %>&libraries=places&callback=initMap"
+async defer></script>

@@ -1,0 +1,49 @@
+<div class="profile--container">
+<p id="notice"><%= notice %></p>
+
+<div id="profile">
+  <h2>
+  <%= @user.name_first %>
+  <%= @user.name_last %>
+</h2>
+  <hr>
+
+  <p>
+    <img class="profile" src="<%= @user.photo  %>"/>
+  </p>
+
+  <p><%= @user.email %></p>
+
+  <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+
+  <hr>
+  <p>Postcode: <%= @user.postcode %></p>
+
+
+
+</div>
+  <div id="map-small"></div>
+</div>
+<script>
+  var map;
+    function initMap() {
+
+      var myLatLng = {lat: <%= @user.lat %>, lng: <%= @user.lon %>};
+
+      map = new google.maps.Map(document.getElementById('map-small'), {
+        center: myLatLng,
+        zoom: 15
+      });
+
+      var image = '/assets/Home-30.png'
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        animation: google.maps.Animation.DROP,
+        icon: image,
+        title: 'Home'
+      });
+marker.setMap(map);
+    }
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=<%= ENV['GEOCODER_API_KEY'] %>&libraries=places&callback=initMap"
+  async defer></script>

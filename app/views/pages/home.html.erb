@@ -1,0 +1,15 @@
+<h1>Home</h1>
+<h3>Show me</h3>
+<%= form_tag("/search", method: "get") do %>
+  <%= radio_button_tag(:phase, "Primary") %>
+  <%= label_tag(:primary, "Primary") %>
+  <%= radio_button_tag(:phase, "Secondary") %>
+  <%= label_tag(:secondary, "Secondary") %>
+  <%= label_tag(:q, "schools near..") %>
+  <%= text_field_tag(:q) %>
+  <%= label_tag(:m, "within..") %>
+  <%= text_field_tag(:m) %>
+  <%= label_tag(:m, "miles.") %>
+
+  <%= submit_tag("Search") %>
+<% end %>
