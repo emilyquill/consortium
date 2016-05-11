@@ -30,5 +30,5 @@ class School < ActiveRecord::Base
   has_many :school_results
   geocoded_by :address_postcode,
     :latitude => :lat, :longitude => :lon
-  after_validation :geocode
+  # after_validation :geocode
 end

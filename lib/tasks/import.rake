@@ -209,6 +209,18 @@ namespace :import do
     ActiveRecord::Base.connection.execute("SELECT SETVAL('school_results_id_seq', COALESCE(MAX(id), 1) ) FROM school_results;")
   end
 
+  task locations: :environment do
+    School.where(:lat => nil).each do |s| 
+      puts s
+       begin
+         loc = s.geocode
+         s.update :lat => loc[0], :lon => loc[1]
+       rescue
+        puts "oops"
+       end
+    end
+  end
+
 
   desc "Populate Database with all Data"
   task :all_records => [:local_authorities, :local_authority_ks2_results, :schools, :school_ks2_results] do

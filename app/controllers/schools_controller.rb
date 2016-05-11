@@ -8,10 +8,10 @@ class SchoolsController < ApplicationController
     end
 
     if params[:phase] == "Primary"
-      @filtered = @schools.where(is_primary: true)
+      @filtered = @schools.where(is_primary: true, is_closed: false )
 
     elsif params[:phase] == "Secondary"
-      @filtered = @schools.where(is_secondary: true)
+      @filtered = @schools.where(is_secondary: true, is_closed: false)
     end
 
   end

@@ -1,0 +1,32 @@
+$brand-color: #3B8686;
+$brand-color-light: #79BD9A;
+$nav-bar: #0B486B;
+
+
+nav {
+  position: fixed;
+  height: 40px;
+  width: 100vw;
+  margin: 0;
+  background-color: $nav-bar;
+    li {
+    display: inline-block;
+    a {
+      text-decoration: none;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: $brand-color
+    }
+    a:hover {
+      color: $brand-color-light;
+
+
+    }
+  }
+}
+
+.navbar-spacer {
+  height: 40px;
+  width: 100vw;
+  margin: 0;
+}
